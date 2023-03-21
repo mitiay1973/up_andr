@@ -88,7 +88,7 @@ public class Prosmotr_foto extends AppCompatActivity {
                             ConnectionHelper connectionHelper = new ConnectionHelper();
                             connection = connectionHelper.connectionClass();
                             if (connection != null) {
-                                String query = "DELETE FROM  Pictures  WHERE ID= "+mask.getID()+"";
+                                String query = "DELETE FROM Image  WHERE id= "+mask.getID()+"";
                                 Statement statement = connection.createStatement();
                                 statement.executeQuery(query);
                             }
@@ -115,4 +115,9 @@ public class Prosmotr_foto extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
+    public void onClickClose(View v) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
     }
