@@ -61,6 +61,26 @@ public class Avtorization extends AppCompatActivity {
             }
         }
     }
+    public void onClickLoginProf(View v) {
+        if(email.getText().toString().equals("") || password.getText().toString().equals(""))
+        {
+            Toast.makeText(Avtorization.this, "Заполните все поля", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Pattern pattern = Pattern.compile("@", Pattern.CASE_INSENSITIVE);
+            Matcher m = pattern.matcher(email.getText().toString());
+            boolean b = m.find();
+            if(b)
+            {
+                Login1();
+            }
+            else
+            {
+                Toast.makeText(Avtorization.this, "Поле Email обязательно должен содержать '@'", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     public void saveInfo(){
         preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -108,7 +128,45 @@ public class Avtorization extends AppCompatActivity {
                     }
                 }
             }
+            @Override
+            public void onFailure(Call<User_Mask> call, Throwable t) {
+                Toast.makeText(Avtorization.this, "При авторизации возникла ошибка: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
+    }
+    public void Login1()
+    {
+        String emails = String.valueOf(email.getText());
+        String passwords = String.valueOf(password.getText());
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://mskko2021.mad.hakta.pro/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Retrofits retrofits = retrofit.create(Retrofits.class);
+
+        UserM modelSendUser = new UserM(emails, passwords);
+        Call<User_Mask> call = retrofits.cUser(modelSendUser);
+        call.enqueue(new Callback<User_Mask>() {
+            @Override
+            public void onResponse(Call<User_Mask> call, Response<User_Mask> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(Avtorization.this, "Пользователь не найден", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(response.body() != null)
+                {
+                    if(response.body().getToken() != null)
+                    {
+                        saveInfo();
+                        mask = response.body();
+                        Intent intent = new Intent(Avtorization.this, Profile.class);
+                        Bundle b = new Bundle();
+                        intent.putExtras(b);
+                        startActivity(intent);
+                    }
+                }
+            }
             @Override
             public void onFailure(Call<User_Mask> call, Throwable t) {
                 Toast.makeText(Avtorization.this, "При авторизации возникла ошибка: " + t.getMessage(), Toast.LENGTH_LONG).show();

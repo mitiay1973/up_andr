@@ -20,14 +20,16 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="50dp"
         android:layout_height="45dp"
-        android:onClick="onClickMenu"
-        android:clickable="true"
         android:layout_marginStart="25dp"
         android:layout_marginTop="21dp"
+        android:clickable="true"
+        android:onClick="onClickMenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu" />
@@ -78,17 +80,18 @@
 
     <GridView
         android:id="@+id/Profile_listfoto"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="377dp"
+        android:layout_height="276dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:focusable="true"
+        android:numColumns="auto_fit"
         app:layout_constraintBottom_toTopOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Profile_Name"
-        android:numColumns="auto_fit"/>
+        app:layout_constraintVertical_bias="0.253" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/Profile_Image"
@@ -114,5 +117,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Profile_Image"></TextView>
+
+    <ImageView
+        android:id="@+id/AddImage"
+        android:layout_width="94dp"
+        android:layout_height="47dp"
+        app:srcCompat="@drawable/foto_plus"
+        android:onClick="onClickAddImg"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="594dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Profile_listfoto"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
