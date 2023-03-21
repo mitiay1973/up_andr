@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -40,7 +41,7 @@ public class Profile extends AppCompatActivity {
     GridView listView;
     String Img="";
     private ImageView imageButton;
-
+    private TextView text;
     String currentTime;
 
     @Override
@@ -50,6 +51,8 @@ public class Profile extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         currentTime = sdf.format(new Date());
         setContentView(R.layout.activity_profile);
+        text = findViewById(R.id.Profile_Name);
+        text.setText(Avtorization.mask.getNickName());
         imageButton=findViewById(R.id.AddImage);
         v = findViewById(com.google.android.material.R.id.ghost_view);
         GetTextFromSQL(v);
